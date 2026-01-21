@@ -1,1 +1,0 @@
-# sytsem_design
