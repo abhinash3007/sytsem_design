@@ -1,14 +1,14 @@
 const express=require("express");
 const app=express();
 
-const data="Old Data";
+let data="Old Data";
 const waitingClients=[];
 app.get('/',(req,res)=>{
     res.sendFile(__dirname+"/index.html");
 });
 
 app.get('/getData',(req,res)=>{
-    const responseData=req.body.lastData;
+    const responseData=req.query.lastdata;
     if(data!=responseData){
         res.json({data});
     }else{
@@ -17,11 +17,11 @@ app.get('/getData',(req,res)=>{
 });
 
 app.get('/updateData',(req,res)=>{
-    data=req.body.data;
+    data=req.query.data;
     waitingClients.forEach(clientRes=>{
         clientRes.json({data});
     })
-    waitingClients=[];
+    waitingClients==0;
     res.json({message:"Data Updated"});
 });
 app.listen(3000,()=>{
